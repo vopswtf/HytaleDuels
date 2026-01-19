@@ -1,0 +1,239 @@
+$C = "../Common.ui";
+$Sounds = "../Sounds.ui";
+
+@AcceptLabelStyle = LabelStyle(
+  FontSize: 16,
+  TextColor: #ffffff,
+  RenderBold: true,
+  RenderUppercase: true,
+  HorizontalAlignment: Center,
+  VerticalAlignment: Center
+);
+
+@DeclineLabelStyle = LabelStyle(
+  FontSize: 16,
+  TextColor: #ffffff,
+  RenderBold: true,
+  RenderUppercase: true,
+  HorizontalAlignment: Center,
+  VerticalAlignment: Center
+);
+
+@AcceptStyle = TextButtonStyle(
+  Default: (Background: #27ae60(0.9), LabelStyle: @AcceptLabelStyle),
+  Hovered: (Background: #2ecc71(1), LabelStyle: @AcceptLabelStyle),
+  Pressed: (Background: #229954(1), LabelStyle: @AcceptLabelStyle),
+  Disabled: (Background: #27ae60(0.4), LabelStyle: @AcceptLabelStyle),
+  Sounds: $C.@ButtonSounds,
+);
+
+@DeclineStyle = TextButtonStyle(
+  Default: (Background: #c0392b(0.9), LabelStyle: @DeclineLabelStyle),
+  Hovered: (Background: #e74c3c(1), LabelStyle: @DeclineLabelStyle),
+  Pressed: (Background: #a93226(1), LabelStyle: @DeclineLabelStyle),
+  Disabled: (Background: #c0392b(0.4), LabelStyle: @DeclineLabelStyle),
+  Sounds: $C.@ButtonSounds,
+);
+
+@ChallengerNameStyle = LabelStyle(
+  FontSize: 20,
+  RenderBold: true,
+  TextColor: #f0de7b,
+  HorizontalAlignment: Start,
+  VerticalAlignment: Center
+);
+
+@ChallengerExtraStyle = LabelStyle(
+  FontSize: 14,
+  TextColor: #96a9be,
+  HorizontalAlignment: Start,
+  VerticalAlignment: Center
+);
+
+@DuelInfoLabelStyle = LabelStyle(
+  FontSize: 15,
+  TextColor: #d3dee3,
+  HorizontalAlignment: Start,
+  VerticalAlignment: Center
+);
+
+@DuelInfoValueStyle = LabelStyle(
+  FontSize: 15,
+  TextColor: #a3d5ff,
+  HorizontalAlignment: Start,
+  VerticalAlignment: Center,
+  RenderBold: true
+);
+
+@CountdownStyle = LabelStyle(
+  FontSize: 12,
+  TextColor: #ffd24d(0.5),
+  RenderBold: true,
+  HorizontalAlignment: End,
+  VerticalAlignment: Center
+);
+
+$C.@PageOverlay {
+
+  $C.@Container {
+    Anchor: (Width: 620, Height: 350);
+
+    #Title {
+      Group {
+        $C.@Title {
+          @Text = "Incoming Duel Request";
+        }
+      }
+    }
+
+    #Content {
+      LayoutMode: Top;
+      Padding: (Left: 20, Right: 20, Top: 15, Bottom: 15);
+
+      Group #Main {
+        LayoutMode: Top;
+        FlexWeight: 1;
+
+        Group {
+          Anchor: (Height: 1);
+          Background: #354c6a(0.4);
+          Padding: (Top: 8, Bottom: 8);
+        }
+
+        Group #ChallengerCard {
+          LayoutMode: Left;
+          Anchor: (Height: 90);
+          Background: $C.@InputBoxBackground;
+          Padding: (Left: 14, Right: 14, Top: 10, Bottom: 10);
+
+          ItemIcon #ItemIcon {
+            Anchor: (Width: 70, Height: 70);
+          }
+
+          Group {
+            LayoutMode: Top;
+            FlexWeight: 1;
+            Padding: (Left: 12, Top: 6);
+
+            Label #ChallengerName {
+              Text: "PlayerName";
+              Style: @ChallengerNameStyle;
+              Anchor: (Bottom: 8);
+            }
+
+            Label #ChallengerExtra {
+              Text: "Extra";
+              Style: @ChallengerExtraStyle;
+            }
+          }
+        }
+
+        Group {
+          LayoutMode: Top;
+          Padding: (Top: 8, Bottom: 8);
+
+          Label {
+            Text: "DUEL DETAILS";
+            Style: (
+              FontSize: 13,
+              TextColor: #96a9be,
+              RenderBold: true,
+              RenderUppercase: true,
+              HorizontalAlignment: Start
+            );
+            Anchor: (Bottom: 10);
+          }
+
+          Group #DuelInfo {
+            LayoutMode: Top;
+            Padding: (Left: 4);
+
+            Group {
+              LayoutMode: Left;
+              Anchor: (Height: 22, Bottom: 8);
+
+              Label {
+                Text: "Kit:";
+                Style: @DuelInfoLabelStyle;
+                Anchor: (Width: 80);
+              }
+
+              Label #KitLabel {
+                Text: "Default";
+                Style: @DuelInfoValueStyle;
+                FlexWeight: 1;
+              }
+            }
+
+            Group {
+              LayoutMode: Left;
+              Anchor: (Height: 22, Bottom: 8);
+
+              Label {
+                Text: "Arena:";
+                Style: @DuelInfoLabelStyle;
+                Anchor: (Width: 80);
+              }
+
+              Label #ArenaLabel {
+                Text: "Unknown";
+                Style: @DuelInfoValueStyle;
+                FlexWeight: 1;
+              }
+            }
+
+            Group {
+              LayoutMode: Left;
+              Anchor: (Height: 22);
+
+              Label {
+                Text: "Rules:";
+                Style: @DuelInfoLabelStyle;
+                Anchor: (Width: 80);
+              }
+
+              Label #RulesLabel {
+                Text: "None";
+                Style: @DuelInfoValueStyle;
+                FlexWeight: 1;
+              }
+            }
+          }
+        }
+
+        // i didnt like how this looked, maybe redesign later
+        Group {
+          LayoutMode: Right;
+          Anchor: (Height: 22, Top: 8, Bottom: 0);
+
+          Label #CountdownLabel {
+            Text: "";
+            Style: @CountdownStyle;
+          }
+        }
+      }
+
+      Group {
+        LayoutMode: Center;
+        Anchor: (Height: 70, Top: 16);
+        // so official lol
+        Background: (TexturePath: "../Common/ContainerDecorationBottom.png", Anchor: (Width: 236, Height: 11, Bottom: -6));
+        Padding: (Top: 12, Bottom: 12);
+
+        $C.@TextButton #AcceptButton {
+          Anchor: (Width: 200, Height: 44, Right: 6);
+          Text: "Accept";
+          Style: @AcceptStyle;
+        }
+
+        $C.@TextButton #DeclineButton {
+          Anchor: (Width: 200, Height: 44, Left: 6);
+          Text: "Decline";
+          Style: @DeclineStyle;
+        }
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

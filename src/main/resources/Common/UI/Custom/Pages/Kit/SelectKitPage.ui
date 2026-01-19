@@ -1,0 +1,28 @@
+$C = "../../Common.ui";
+
+$C.@PageOverlay {
+
+  $C.@Container {
+    Anchor: (Width: 1100, Height: 720);
+
+    #Title {
+      Group {
+        $C.@Title {
+          @Text = "Select a Kit";
+        }
+      }
+    }
+
+    #Content {
+      LayoutMode: Top;
+      Padding: (Top: 20, Left: 20, Right: 20, Bottom: 20);
+
+      Group #KitGrid {
+        LayoutMode: TopScrolling;
+        ScrollbarStyle: $C.@DefaultScrollbarStyle;
+      }
+    }
+  }
+}
+
+$C.@BackButton {}

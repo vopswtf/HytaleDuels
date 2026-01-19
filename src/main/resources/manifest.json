@@ -1,0 +1,7 @@
+{
+    "Group": "vops",
+    "Name": "HytaleDuels",
+    "Version": "1.0.0",
+    "Main": "cc.vops.duels.HytaleDuels",
+    "IncludesAssetPack": true
+}
